@@ -6,10 +6,13 @@ const BOOK_QUERY = gql`
     fish {
       name
       prices {
-        normal
-        silver
-        gold
         iridium
+      }
+      catchDifficulty
+      legendary
+      bundle
+      catchOpportunities {
+        season
       }
     }
   }
