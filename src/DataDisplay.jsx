@@ -2,11 +2,15 @@ import { gql, useQuery } from "@apollo/client";
 import { useMemo } from "react";
 
 const BOOK_QUERY = gql`
-  query {
-    books {
-      title
-      author
-      color
+  query GetFishData {
+    fish {
+      name
+      prices {
+        normal
+        silver
+        gold
+        iridium
+      }
     }
   }
 `;
