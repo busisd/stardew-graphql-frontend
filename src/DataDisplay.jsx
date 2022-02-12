@@ -1,4 +1,12 @@
 import { gql, useQuery } from "@apollo/client";
+import {
+  Box,
+  Button,
+  Container,
+  Select,
+  SpaceBetween,
+  Textarea,
+} from "@awsui/components-react";
 import { useMemo, useState } from "react";
 
 const ALL_FISH_QUERY = gql`
@@ -35,23 +43,20 @@ const SPECIFIC_FISH_QUERY = gql`
   }
 `;
 
-export const DataDisplay = () => {
-  const { loading, error, data } = useQuery(ALL_FISH_QUERY);
-
-  const dataDisplayContent = useMemo(() => {
-    if (loading) return "Loading...";
-    if (error) return error.toString();
-    return JSON.stringify(data, null, 2);
-  }, [loading, error, data]);
-
-  return <textarea readOnly className="data-display" value={dataDisplayContent}></textarea>;
-};
+const fishOptions = [
+  { label: "All", value: "All" },
+  { label: "Albacore", value: "Albacore" },
+  { label: "Anchovy", value: "Anchovy" },
+  { label: "Angler", value: "Angler" },
+  { label: "Blob Fish", value: "Blob Fish" },
+  { label: "Bream", value: "Bream" },
+];
 
 export const SpecificFishDisplay = () => {
-  const [fishToShow, setFishToShow] = useState("Albacore");
+  const [fishOption, setFishOption] = useState(fishOptions[1]);
 
   const { loading, error, data } = useQuery(SPECIFIC_FISH_QUERY, {
-    variables: { name: fishToShow === "All" ? null : fishToShow },
+    variables: { name: fishOption.value === "All" ? null : fishOption.value },
   });
 
   const dataDisplayContent = useMemo(() => {
@@ -61,16 +66,15 @@ export const SpecificFishDisplay = () => {
   }, [loading, error, data]);
 
   return (
-    <>
-      <select value={fishToShow} onChange={(e) => setFishToShow(e.target.value)}>
-        <option value="All">All</option>
-        <option value="Albacore">Albacore</option>
-        <option value="Anchovy">Anchovy</option>
-        <option value="Angler">Angler</option>
-        <option value="Blob Fish">Blob Fish</option>
-        <option value="Bream">Bream</option>
-      </select>
-      <textarea readOnly className="data-display" value={dataDisplayContent} />
-    </>
+    <Container>
+      <SpaceBetween size="m">
+        <Textarea readOnly value={dataDisplayContent} rows={25} />
+        <Select
+          options={fishOptions}
+          selectedOption={fishOption}
+          onChange={(e) => setFishOption(e.detail.selectedOption)}
+        />
+      </SpaceBetween>
+    </Container>
   );
 };

@@ -1,15 +1,15 @@
-import "./App.css";
-import { DataDisplay, SpecificFishDisplay } from "./DataDisplay";
+import { SpecificFishDisplay } from "./DataDisplay";
+import { AppLayout, Header } from "@awsui/components-react";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>Data fetched from a GraphQL API</p>
-        {/* <DataDisplay /> */}
-        <SpecificFishDisplay />
-      </header>
-    </div>
+    <AppLayout
+      contentHeader={<Header>Data fetched from a GraphQL API</Header>}
+      content={<SpecificFishDisplay />}
+      navigationHide={true}
+      toolsHide={true}
+      contentType={"cards"}
+    />
   );
 }
 
