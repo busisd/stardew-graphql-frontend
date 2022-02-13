@@ -4,7 +4,7 @@ import { AppLayout, Header } from "@awsui/components-react";
 function App() {
   return (
     <AppLayout
-      contentHeader={<Header>Data fetched from a GraphQL API</Header>}
+      // contentHeader={<Header>Data fetched from a GraphQL API</Header>}
       content={<SpecificFishDisplay />}
       navigationHide={true}
       toolsHide={true}
