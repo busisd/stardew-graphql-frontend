@@ -1,4 +1,4 @@
-import { SpecificFishDisplay } from "./DataDisplay";
+import { SpecificFishDisplay } from "components/DataDisplay";
 import { AppLayout, Header } from "@awsui/components-react";
 
 function App() {
